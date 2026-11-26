@@ -4,23 +4,17 @@ from .forms import ProductoForm
 
 
 def index(request):
-
     if request.method == 'POST':
-
         form = ProductoForm(request.POST)
-
         if form.is_valid():
             form.save()
-            return redirect('index')
-
+            return redirect('inicio')
     else:
-
         form = ProductoForm()
 
-productos = Producto.objects.all().order_by('-id')
+    productos = Producto.objects.all().order_by('-id')
+    return render(request, 'index.html', {'form': form, 'productos': productos})
 
-inicio = index
 
 def nosotros(request):
-
-           return render(request, 'nosotros.html')
+    return render(request, 'nosotros.html')
